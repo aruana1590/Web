@@ -30,16 +30,7 @@ public class DevServiceImpl implements DevService {
     public Developers insert(DevelopersDtoResponse developersDtoResponse)  {
      String b1 = developersDtoResponse.getFio();//true
        Integer b2 = developersDtoResponse.getSalary();//true
-        //Developers developers  = new Developers();
-    /* try {
-        if ((b1 instanceof String) | ){
-            throw new InputMismatchException(Message.WRONG_DATA_TYPE);}
-        if((b2 instanceof Integer)){
-            throw new InputMismatchException(Message.WRONG_DATA_TYPE);}
 
-      }catch(Exception e){
-
-       }*/
         if (b1 instanceof String | b1.isBlank())
             throw new MismatchedException(Message.WRONG_DATA_TYPE);
         if(b2 instanceof Integer)
@@ -55,14 +46,14 @@ public class DevServiceImpl implements DevService {
             throw new NotFoundException(Message.NOT_CREATED +" " + Message.WRONG_DATA_TYPE);
 
         }
-        //developers.setFio(developersDtoResponse.getFio());
-      //  developers.setSalary(developersDtoResponse.getSalary());
-      //  return devRepository.save(developers);
+
     }
     @Override
     public Developers update(Long id, DevelopersDtoResponse developersDtoResponse) {
         Developers updatingNote = devRepository.findById(id).orElseThrow(()-> new NotFoundException(Message.NOT_FOUND_ID));
+        updatingNote.setFio(developersDtoResponse.getFio());
         updatingNote.setSalary(developersDtoResponse.getSalary());
+
         return devRepository.save(updatingNote);
     }
 
